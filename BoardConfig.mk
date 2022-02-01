@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/xiaomi/odin
+DEVICE_PATH := device/motorola/osaka
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -38,7 +38,7 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := odin
+TARGET_OTA_ASSERT_DEVICE := osaka
 
 # A/B
 AB_OTA_UPDATER := true
@@ -46,7 +46,6 @@ AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := \
     boot \
     dtbo \
-    odm \
     product \
     system \
     system_ext \
@@ -80,14 +79,12 @@ BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
 BOARD_KERNEL_CMDLINE += pcie_ports=compat
 BOARD_KERNEL_CMDLINE += service_locator.enable=1
 BOARD_KERNEL_CMDLINE += swiotlb=0
-BOARD_KERNEL_CMDLINE += video=vfb:640x400,bpp=32,memsize=3072000
 
-KERNEL_LD := LD=ld.lld
+KERNEL_LD := LLVM=1
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CONFIG := vendor/odin-qgki_defconfig
-TARGET_KERNEL_SOURCE := kernel/xiaomi/odin
-NEED_KERNEL_MODULE_RECOVERY := true
+TARGET_KERNEL_CONFIG := vendor/osaka_defconfig
+TARGET_KERNEL_SOURCE := kernel/motorola/osaka
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
@@ -95,7 +92,8 @@ BOARD_USES_QCOM_FBE_DECRYPTION := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_BOOTIMAGE_PARTITION_SIZE := 201326592
+BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
+
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
 
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
@@ -108,15 +106,15 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_BOARD_PLATFORM := lahaina
+TARGET_BOARD_PLATFORM := holi
 
 # Properties
-TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
 # Recovery
 BOARD_USES_RECOVERY_AS_BOOT := true
+TARGET_NO_RECOVERY := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_USERIMAGES_USE_EXT4 := true

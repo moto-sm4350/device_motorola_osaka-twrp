@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-     $(LOCAL_DIR)/twrp_odin.mk
+     $(LOCAL_DIR)/twrp_osaka.mk

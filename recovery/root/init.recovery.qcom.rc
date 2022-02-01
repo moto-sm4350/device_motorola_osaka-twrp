@@ -17,3 +17,12 @@ on fs
 on boot
     start health-hal-2-1
     setprop sys.usb.config adb
+    chmod 0777 /system/bin/runatboot.sh
+    start load_modules
+
+service load_modules /system/bin/load_modules.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
