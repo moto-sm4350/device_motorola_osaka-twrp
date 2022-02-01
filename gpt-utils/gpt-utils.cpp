@@ -32,6 +32,7 @@
 /******************************************************************************
  * INCLUDE SECTION
  ******************************************************************************/
+#include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
@@ -42,6 +43,7 @@
 #include <limits.h>
 #include <dirent.h>
 #include <linux/kernel.h>
+#include <asm/byteorder.h>
 #include <map>
 #include <vector>
 #include <string>
@@ -717,6 +719,7 @@ int prepare_partitions(enum boot_update_stage stage, const char *dev_path)
     enum gpt_state gpt_prim, gpt_second;
     enum boot_update_stage internal_stage;
     struct stat xbl_partition_stat;
+    struct stat ufs_dir_stat;
 
     if (!dev_path) {
         fprintf(stderr, "%s: Invalid dev_path\n",
@@ -939,6 +942,7 @@ int add_lun_to_update_list(char *lun_path, struct update_data *dat)
 
 int prepare_boot_update(enum boot_update_stage stage)
 {
+        int r, fd;
         int is_ufs = gpt_utils_is_ufs_device();
         struct stat ufs_dir_stat;
         struct update_data data;
@@ -1478,7 +1482,7 @@ int gpt_disk_commit(struct gpt_disk *disk)
                 ALOGE("%s: Invalid args", __func__);
                 goto error;
         }
-        fd = open(disk->devpath, O_RDWR);
+        fd = open(disk->devpath, O_RDWR | O_DSYNC);
         if (fd < 0) {
                 ALOGE("%s: Failed to open %s: %s",
                                 __func__,
@@ -1510,6 +1514,7 @@ int gpt_disk_commit(struct gpt_disk *disk)
                                 __func__);
                 goto error;
         }
+        fsync(fd);
         close(fd);
         return 0;
 error:
@@ -1517,4 +1522,3 @@ error:
                 close(fd);
         return -1;
 }
-
