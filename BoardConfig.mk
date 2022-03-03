@@ -65,7 +65,28 @@ BOARD_BOOT_HEADER_VERSION := 3
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 
-BOARD_KERNEL_CMDLINE := log_buf_len=256k firmware_class.path=/vendor/firmware_mnt/image androidboot.bootdevice.4804000.ufshc androidboot.console=MSM androidboot.hardware=qcom androidboot.hwrev=0xC000 androidboot.memcg=1 androidboot.selinux=permissive androidboot.usbcontroller=4e00000.dwc3 cgroup.memory=nokmem,nosocket androidboot.force_normal_boot=1 storage_mfrid=0x1AD ip6table_raw.raw_before_defrag=1 iptable_raw.raw_before_defrag=1 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x237 swiotlb=0 msm_drm.dsi_display0=qcom,mdss_dsi_nt36675_boe_video: rootwait ro init=/init androidboot.write_protect=0 androidboot.dtbo_idx=4 androidboot.dtb_idx=0 androidboot.ssm_data=00000000000F5551
+BOARD_KERNEL_CMDLINE += log_buf_len=256k
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
+BOARD_KERNEL_CMDLINE += androidboot.bootdevice.4804000.ufshc
+BOARD_KERNEL_CMDLINE += androidboot.console=MSM 
+BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom 
+BOARD_KERNEL_CMDLINE += androidboot.hwrev=0xC000 
+BOARD_KERNEL_CMDLINE += androidboot.memcg=1 
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive 
+BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=4e00000.dwc3 
+BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem,nosocket
+BOARD_KERNEL_CMDLINE += androidboot.force_normal_boot=1
+BOARD_KERNEL_CMDLINE += storage_mfrid=0x1AD
+BOARD_KERNEL_CMDLINE += ip6table_raw.raw_before_defrag=1
+BOARD_KERNEL_CMDLINE += iptable_raw.raw_before_defrag=1
+BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
+BOARD_KERNEL_CMDLINE += swiotlb=0 msm_drm.dsi_display0=qcom,mdss_dsi_nt36675_boe_video:
+BOARD_KERNEL_CMDLINE += rootwait ro init=/init
+BOARD_KERNEL_CMDLINE += androidboot.write_protect=0
+BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=4
+BOARD_KERNEL_CMDLINE += androidboot.dtb_idx=0
+BOARD_KERNEL_CMDLINE += androidboot.ssm_data=00000000000F5551
 
 KERNEL_LD := LLVM=1
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc
