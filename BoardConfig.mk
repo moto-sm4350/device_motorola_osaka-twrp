@@ -81,7 +81,8 @@ BOARD_KERNEL_CMDLINE += ip6table_raw.raw_before_defrag=1
 BOARD_KERNEL_CMDLINE += iptable_raw.raw_before_defrag=1
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
 BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
-BOARD_KERNEL_CMDLINE += swiotlb=0 msm_drm.dsi_display0=qcom,mdss_dsi_nt36675_boe_video:
+BOARD_KERNEL_CMDLINE += swiotlb=0
+BOARD_KERNEL_CMDLINE += msm_drm.dsi_display0=qcom,mdss_dsi_nt36675_boe_video:
 BOARD_KERNEL_CMDLINE += rootwait ro init=/init
 BOARD_KERNEL_CMDLINE += androidboot.write_protect=0
 BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=4
