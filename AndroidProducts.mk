@@ -16,3 +16,7 @@
 
 PRODUCT_MAKEFILES := \
      $(LOCAL_DIR)/twrp_osaka.mk
+     
+COMMON_LUNCH_CHOICES += \
+     twrp_osaka-userdebug \
+     twrp_osaka-eng
