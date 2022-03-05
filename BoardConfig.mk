@@ -63,22 +63,31 @@ BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_BOOT_HEADER_VERSION := 3
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 
-BOARD_KERNEL_CMDLINE += androidboot.console=ttyMSM0
-BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
-BOARD_KERNEL_CMDLINE += androidboot.memcg=1
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=a600000.dwc3
+BOARD_KERNEL_CMDLINE += log_buf_len=256k
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
+BOARD_KERNEL_CMDLINE += androidboot.bootdevice.4804000.ufshc
+BOARD_KERNEL_CMDLINE += androidboot.console=MSM 
+BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom 
+BOARD_KERNEL_CMDLINE += androidboot.hwrev=0xC000 
+BOARD_KERNEL_CMDLINE += androidboot.memcg=1 
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive 
+BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=4e00000.dwc3 
 BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem,nosocket
-BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200n8
-BOARD_KERNEL_CMDLINE += earlycon=msm_geni_serial,0x880000
+BOARD_KERNEL_CMDLINE += androidboot.force_normal_boot=1
+BOARD_KERNEL_CMDLINE += storage_mfrid=0x1AD
 BOARD_KERNEL_CMDLINE += ip6table_raw.raw_before_defrag=1
 BOARD_KERNEL_CMDLINE += iptable_raw.raw_before_defrag=1
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
 BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
-BOARD_KERNEL_CMDLINE += pcie_ports=compat
-BOARD_KERNEL_CMDLINE += service_locator.enable=1
 BOARD_KERNEL_CMDLINE += swiotlb=0
+BOARD_KERNEL_CMDLINE += msm_drm.dsi_display0=qcom,mdss_dsi_nt36675_boe_video:
+BOARD_KERNEL_CMDLINE += rootwait ro init=/init
+BOARD_KERNEL_CMDLINE += androidboot.write_protect=0
+BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=4
+BOARD_KERNEL_CMDLINE += androidboot.dtb_idx=0
+BOARD_KERNEL_CMDLINE += androidboot.ssm_data=00000000000F5551
 
 KERNEL_LD := LLVM=1
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc
@@ -94,15 +103,18 @@ BOARD_USES_QCOM_FBE_DECRYPTION := true
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
-
-BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
-BOARD_SUPER_PARTITION_SIZE := 9126805504
-BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext vendor
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200 # (BOARD_SUPER_PARTITION_SIZE - 4MB)
-
+BOARD_SUPER_PARTITION_GROUPS := mot_dynamic_partitions
+BOARD_SUPER_PARTITION_SIZE := 13958643712
+BOARD_MOT_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext vendor
+BOARD_MOT_DYNAMIC_PARTITIONS_SIZE := 6977224704 # (BOARD_SUPER_PARTITION_SIZE - 4MB) / 2
+BOARD_DTBOIMG_PARTITION_SIZE := 25165824 # (0x1800000)
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+
+BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
 TARGET_COPY_OUT_VENDOR := vendor
+
+BOARD_ROOT_EXTRA_FOLDERS := bluetooth dsp firmware persist
+BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true

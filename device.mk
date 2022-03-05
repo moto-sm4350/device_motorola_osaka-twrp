@@ -95,6 +95,10 @@ TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 TARGET_USES_MKE2FS := true
 TW_EXCLUDE_APEX := true
+TW_EXCLUDE_SUPERSU := true
+TW_HAS_EDL_MODE := true
+TW_OZIP_DECRYPT_KEY := 0000
+TW_NO_SCREEN_BLANK := true
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
@@ -105,13 +109,15 @@ VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 BOARD_USES_QCOM_FBE_DECRYPTION := true
 
+# Vibrator
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+
 TARGET_RECOVERY_DEVICE_MODULES += \
     libandroidicu \
     libdisplayconfig.qti \
     libion \
     vendor.display.config@1.0 \
-    vendor.display.config@2.0 \
-    libdisplayconfig.qti
+    vendor.display.config@2.0
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
@@ -125,3 +131,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
+
+# PBRP specific build flags
+PB_TORCH_PATH := "/sys/class/leds/led:torch_0"
+PB_DISABLE_DEFAULT_DM_VERITY := true
+PB_DISABLE_DEFAULT_TREBLE_COMP := true
